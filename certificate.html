@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        #certificateForm {
+            margin: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <img src="logo.png" alt="logo" width="190px">
+    <h1>Certificate Generator</h1>
+    <h3>Well Done! Thank you for participating.</h3>
+    <form id="certificateForm">
+        <label for="userName">Enter Your Name:</label>
+        <input type="text" id="userName" placeholder="Your Name" required>
+        <button type="submit">Generate Certificate</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+    <script src="gv.js"></script>
+</body>
+</html>

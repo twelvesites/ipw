@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infection Prevention Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #ffffff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #4CAF50;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            margin: 0;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 5px 0;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f3e7;
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+        }
+        .correct-answer {
+            color: red;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #ffffff;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+      <img src="logo.png" alt="logo" width="190px">
+        <h1>Infection Prevention Quiz</h1>
+    </header>
+    <div class="container">
+        <div class="question" id="question1">
+            <p>1. What is the most effective way to prevent the spread of infections?</p>
+            <ul class="options">
+                <li><input type="radio" name="q1" value="a"> Using hand sanitizer</li>
+                <li><input type="radio" name="q1" value="b"> Washing hands with soap and water</li>
+                <li><input type="radio" name="q1" value="c"> Wearing gloves</li>
+            </ul>
+        </div>
+        <div class="question" id="question2" style="display: none;">
+            <p>2. How long should you wash your hands to effectively remove germs?</p>
+            <ul class="options">
+                <li><input type="radio" name="q2" value="a"> 10 seconds</li>
+                <li><input type="radio" name="q2" value="b"> 20 seconds</li>
+                <li><input type="radio" name="q2" value="c"> 30 seconds</li>
+            </ul>
+        </div>
+        <div class="question" id="question3" style="display: none;">
+            <p>3. Which of the following is NOT a recommended practice to prevent infections?</p>
+            <ul class="options">
+                <li><input type="radio" name="q3" value="a"> Covering your mouth when coughing</li>
+                <li><input type="radio" name="q3" value="b"> Sharing personal items</li>
+                <li><input type="radio" name="q3" value="c"> Getting vaccinated</li>
+            </ul>
+        </div>
+        <button onclick="submitAnswer()">Next</button>
+        <div class="result" id="result"></div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Infection Prevention Quiz. All rights reserved.</p>
+    </footer>
+    <script>
+        let currentQuestion = 1;
+        let score = 0;
+        const totalQuestions = 3;
+
+        const answers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'b'
+        };
+
+        function submitAnswer() {
+            const question = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+            if (question) {
+                if (question.value === answers[`q${currentQuestion}`]) {
+                    score++;
+                } else {
+                    alert(`Wrong answer! Correct answer: ${document.getElementById(`question${currentQuestion}`).querySelector('.options li input[value="' + answers[`q${currentQuestion}`] + '"]').parentElement.textContent.trim()}`);
+                }
+                if (currentQuestion < totalQuestions) {
+                    document.getElementById(`question${currentQuestion}`).style.display = 'none';
+                    currentQuestion++;
+                    document.getElementById(`question${currentQuestion}`).style.display = 'block';
+                } else {
+                    const percentage = (score / totalQuestions) * 100;
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.style.display = 'block';
+                    resultDiv.innerHTML = `You scored ${percentage}%. Well done!`;
+                    setTimeout(() => {
+                        window.location.href = 'certificate.html';
+                    }, 3000);
+                }
+            } else {
+                alert('Please select an answer.');
+            }
+        }
+    </script>
+</body>
+</html>
